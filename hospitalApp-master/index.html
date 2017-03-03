@@ -1,0 +1,63 @@
+<html ng-app="hospitalApp">
+
+<head>
+    <title>HospitalApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/jQuery/jquery.min.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container wrapper" ng-controller="PatientController">
+        <h1 class="text-center">Patient Information</h1>
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <div class="alert alert-default navbar-brand search-box">
+                    <button class="btn btn-primary" ng-show="show_form" ng-click="showPatientForm()">Add Patient
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="alert alert-default input-group search-box">
+                    <span class="input-group-btn">
+                        <input type="text" class="form-control" placeholder="Search Patient details by typing either firstname, lastname or phone number..." ng-model="searchString">
+                    </span>
+                </div>
+            </div>
+        </nav>
+        <div class="col-md-6 col-md-offset-3">
+            <!-- Include form template which is used to insert data into database -->
+            <div ng-include src="'templates/form.html'"></div>          
+        </div>
+        <div class="clearfix"></div>
+        <table class="table table-bordered table-hover">
+            <tr>
+                <th>Patient ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Age</th>
+                <th>DOB</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>Free text</th>
+            </tr>
+            <tr ng-repeat="patient in patients | searchPatient : searchString">
+                <td><span>{{patient.patient_id}}</span></td>
+                <td>{{patient.firstname}}</td>
+                <td>{{patient.lastname}}</td>
+                <td>{{patient.age}}</td>
+                <td>{{patient.dob}}</td>
+                <td>{{patient.gender}}</td>
+                <td>{{patient.phone}}</td>
+                <td>{{patient.free_text}}</td>
+            </tr>
+        </table>
+    </div>
+   <a href="#" ng-click="open()">show</a>    
+        <!-- Include controller -->
+        <script src="js/app.js"></script>
+</body>
+
+</html>
